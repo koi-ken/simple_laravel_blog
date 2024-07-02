@@ -1,5 +1,6 @@
+"use client";
 
-import 'axios';
+import axios from 'axios';
 
 export default function Page(){
 
