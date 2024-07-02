@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SigninController extends Controller
 {
@@ -27,6 +28,7 @@ class SigninController extends Controller
         Auth::login($user);
 
         // ダッシュボードへリダイレクト
-        return redirect()->intended('dashboard');
+        //return redirect()->intended('dashboard');
+        return response()->json(['message' => 'success'], 200);
     }
 }
