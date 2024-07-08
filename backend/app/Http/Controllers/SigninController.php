@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 class SigninController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(Request $request): Response
     {
         $validated = $request->validate([
             'name' => 'required',
@@ -24,11 +25,11 @@ class SigninController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
+        //event(new Registered($user));
+
         // このユーザーをログイン状態にする
         Auth::login($user);
 
-        // ダッシュボードへリダイレクト
-        //return redirect()->intended('dashboard');
-        return response()->json(['message' => 'success'], 200);
+        return response()->noContent();
     }
 }

@@ -6,9 +6,11 @@ import Loading from '@/app/(app)/Loading'
 const AppLayout = ({ children }: {children: React.ReactNode; }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
+    
     if (!user) {
         return <Loading />
     }
+    
 
     return (
         <div className="min-h-screen bg-gray-100">
